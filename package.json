@@ -1,0 +1,20 @@
+{
+  "name": "my-webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "my-pack": "./bin/my-pack.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.6.0",
+    "@babel/traverse": "^7.6.0",
+    "@babel/types": "^7.6.1",
+    "babylon": "^6.18.0",
+    "ejs": "^2.7.1"
+  }
+}
