@@ -1,12 +1,14 @@
 const path = require("path");
 const fs = require("fs");
+
 //用于把源码转成ast
 const babylon = require("babylon");
 const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
 const t = require("@babel/types");
+
+// 打包后的bundle模板
 const ejs = require("ejs");
-const template = require("./template.ejs");
 
 class Compiler {
   constructor(config) {
@@ -37,9 +39,8 @@ class Compiler {
       path.dirname(moduleId)
     );
     this.modules[moduleId] = sourceCode;
-    // console.log({ sourceCode, dependencies });
 
-    // 递归加载依赖
+    // 递归加载依赖，-> 依赖
     dependencies.forEach(it => {
       this.buildModule(path.join(this.root, it), false);
     });
@@ -77,6 +78,8 @@ class Compiler {
     const sourceCode = generator(ast).code;
     return { sourceCode, dependencies };
   }
+
+  // 把处理完成的数据套入打包模板，并写入文件
   emitFile() {
     const output = path.join(
       this.config.output.path,
