@@ -33,7 +33,11 @@
     function(module, exports, __webpack_require__) {
       eval(`const info = __webpack_require__("./src/base/a.js");
 
-console.log(info);`)
+console.log(info);
+
+__webpack_require__("./src/index.less");
+
+console.log('info');`)
     },
   
     "./src/base/a.js":
@@ -46,6 +50,15 @@ module.exports = b + " isa";`)
     "./src/base/b.js":
     function(module, exports, __webpack_require__) {
       eval(`module.exports = 'boy';`)
+    },
+  
+    "./src/index.less":
+    function(module, exports, __webpack_require__) {
+      eval(`
+    const style = document.createElement('style');
+    style.innerHTML="body {\\n  background-color: antiquewhite;\\n}\\nbody .title {\\n  color: red;\\n}\\n";
+    document.head.appendChild(style);
+    `)
     },
   
   

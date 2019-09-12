@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /Users/stanley_wpt/.yarn/bin/yarn.js add ejs
+  /usr/local/bin/node /Users/stanley_wpt/.yarn/bin/yarn.js add less
 
 PATH: 
   /Users/stanley_wpt/.yarn/bin:/Users/stanley_wpt/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS:/Users/stanley_wpt/.yarn/bin:/Users/stanley_wpt/.config/yarn/global/node_modules/.bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/stanley_wpt/Documents/workspace/myWebpack/node_modules/@babel/generator/node_modules/source-map/LICENSE'
+  Error: EACCES: permission denied, unlink '/Users/stanley_wpt/Documents/workspace/myWebpack/node_modules/@babel/generator/node_modules/source-map/CHANGELOG.md'
 
 npm manifest: 
   {
@@ -33,7 +33,8 @@ npm manifest:
       "@babel/generator": "^7.6.0",
       "@babel/traverse": "^7.6.0",
       "@babel/types": "^7.6.1",
-      "babylon": "^6.18.0"
+      "babylon": "^6.18.0",
+      "ejs": "^2.7.1"
     }
   }
 
@@ -949,6 +950,11 @@ Lockfile:
       inherits "^2.0.1"
       readable-stream "^2.0.0"
       stream-shift "^1.0.0"
+  
+  ejs@^2.7.1:
+    version "2.7.1"
+    resolved "https://registry.npm.taobao.org/ejs/download/ejs-2.7.1.tgz?cache=0&sync_timestamp=1567453332151&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fejs%2Fdownload%2Fejs-2.7.1.tgz#5b5ab57f718b79d4aca9254457afecd36fa80228"
+    integrity sha1-W1q1f3GLedSsqSVEV6/s02+oAig=
   
   elliptic@^6.0.0:
     version "6.5.1"

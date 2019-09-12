@@ -25,12 +25,36 @@ class Compiler {
   }
 
   getSource(filePath) {
-    return fs.readFileSync(filePath, "utf8");
+    let code = fs.readFileSync(filePath, "utf8");
+
+    const { rules = [] } = this.config.module || {};
+    let { length } = rules;
+    while (length > 0) {
+      length -= 1;
+      const { test, use } = rules[length];
+    if (!test.test(filePath)) continue;
+
+      // 一个文件类型可能使用多个loader,这里默认为数组todo
+      let len = use.length;
+    while (len > 0) {
+        len -= 1;
+        const loader = require(use[len]);
+        code = loader(code);
+      }
+    }
+
+    return code;
   }
 
   buildModule(modulePath, isEntry) {
-    const source = this.getSource(modulePath);
     const moduleId = "./" + path.relative(this.root, modulePath);
+    const source = this.getSource(modulePath);
+
+    // 只处理js文件
+    if (!/\.js$/.test(moduleId)) {
+      this.modules[moduleId] = source;
+      return;
+    }
     if (isEntry) {
       this.entryId = moduleId;
     }
@@ -85,11 +109,15 @@ class Compiler {
       this.config.output.path,
       this.config.output.filename
     );
-    
-    const tpl = this.getSource(path.join(this.root, './bin/template.ejs'));
-    console.log({tpl });
-    const code = ejs.render(tpl,{entryId:this.entryId,modules:this.modules});
-    fs.writeFileSync(output,code);
+
+    const tpl = this.getSource(path.join(this.root, "./bin/template.ejs"));
+    const code = ejs.render(tpl, {
+      entryId: this.entryId,
+      modules: this.modules
+    });
+    this.assets = {};
+    this.assets[output] = code;
+    fs.writeFileSync(output, code);
   }
 }
 
