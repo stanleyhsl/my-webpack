@@ -1,11 +1,10 @@
 const info = require("./base/a.js");
+import p from './base/a.png';
 
 console.log(info);
-const p = new Promise(resove => {
-  setTimeout(()=>{
-      resove(`定时返回:${info}`)
-  },1000)
-});
-p.then(text => {
-  document.getElementById("root").innerHTML = text;
-});
+  document.getElementById("root").innerHTML = info;
+
+  const img = document.createElement('img');
+  img.src =p;
+  document.body.appendChild(img);
+
