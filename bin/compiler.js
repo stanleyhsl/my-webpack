@@ -7,6 +7,7 @@ const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
 const t = require("@babel/types");
 
+const {SyncHook} = require("tapable");
 // 打包后的bundle模板
 const ejs = require("ejs");
 
@@ -17,11 +18,36 @@ class Compiler {
     this.modules = {}; // 需要保存所有的模块依赖
     this.entry = config.entry; // 入口文件
     this.root = process.cwd(); //工作路径
+
+    // plugin处理
+    this.hooks ={
+      entryOption:new SyncHook(),
+      compile:new SyncHook(),
+      afterCompile:new SyncHook(),
+      afterPlugins:new SyncHook(),
+      run:new SyncHook(),
+      emit:new SyncHook(['name']),
+      done:new SyncHook(),
+    }
+    // 如果传递了plugins
+    const {plugins} =this.config;
+    if(Array.isArray(plugins)){
+      plugins.forEach(it=>{
+        it.apply(this);
+      })
+    }
+    this.hooks.afterPlugins.call();
   }
 
   run() {
+    this.hooks.run.call();
+    this.hooks.compile.call();
     this.buildModule(path.resolve(this.root, this.entry), true);
+    this.hooks.afterCompile.call();
     this.emitFile();
+    this.hooks.emit.call('stan');
+    console.log(this.hooks.emit.taps)
+    this.hooks.done.call();
   }
 
   getSource(filePath) {

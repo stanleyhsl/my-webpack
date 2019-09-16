@@ -1,4 +1,18 @@
 const path = require("path");
+class MyPlug{
+  apply(compiler){
+    compiler.hooks.emit.tap('emit',function(name){
+      console.log('emit:',name);
+    });
+  }
+}
+class Plug2{
+  apply(compiler){
+    compiler.hooks.emit.tap('PLUG2',function(name){
+      console.log('PLUG2:',name);
+    });
+  }
+}
 
 module.exports = {
   mode: "development",
@@ -17,5 +31,8 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins:[
+    new MyPlug(),
+  ]
 };
