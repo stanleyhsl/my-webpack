@@ -1,4 +1,5 @@
 const path = require("path");
+const DeployPlugin = require("./plugins/deployPlugin");
 
 module.exports = {
   mode: "development",
@@ -7,14 +8,16 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
   },
-  resolveLoader: { // 加载loader的方式
+  resolveLoader: {
+    // 加载loader的方式
     // 查找loader的路径顺序
     modules: ["node_modules", path.resolve(__dirname, "loaders")],
-    alias: { // loader的别名
+    alias: {
+      // loader的别名
       loader1: path.resolve(__dirname, "loaders", "someloader")
     }
   },
-  devtool:'source-map', // 生成map
+  devtool: "source-map", // 生成map
   module: {
     rules: [
       {
@@ -22,7 +25,7 @@ module.exports = {
         use: {
           loader: "url-loader",
           options: {
-            limit: 20*1024 // 小于20k会转换成base64
+            limit: 20 * 1024 // 小于20k会转换成base64
           }
         }
       },
@@ -36,5 +39,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new DeployPlugin({
+      host: "172.16.2.35/test",
+      secretKey: "esdfsd"
+    })
+  ]
 };
