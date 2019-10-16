@@ -87,7 +87,7 @@ class Compiler {
     );
     
     const tpl = this.getSource(path.join(this.root, './bin/template.ejs'));
-    console.log({tpl });
+    console.log('打包完成:\n\t',output);
     const code = ejs.render(tpl,{entryId:this.entryId,modules:this.modules});
     fs.writeFileSync(output,code);
   }

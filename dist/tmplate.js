@@ -25,7 +25,7 @@
     return module.exports;
   }
 
-  // Load entry module and return exports
+  // 加载入口文件，返回exports
   return __webpack_require__("./src/index.js");
 })({
   "./src/base/a.js": function(module, exports, __webpack_require__) {

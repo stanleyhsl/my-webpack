@@ -25,7 +25,7 @@
     return module.exports;
   }
 
-  // Load entry module and return exports
+  // 加载入口文件，返回exports
   return __webpack_require__("<%-entryId%>");
 })({
   <%for(let key in modules){%>

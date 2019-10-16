@@ -1,2 +1,2 @@
 const b = require("./b.js");
-module.exports = b + " isa";
+module.exports = b + " boy";

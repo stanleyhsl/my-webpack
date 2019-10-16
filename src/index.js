@@ -1,2 +1,3 @@
-const info = require('./base/a.js');
-console.log(info)
+const A = require("./base/a.js");
+const info = "You are a " + A;
+console.log(info);
