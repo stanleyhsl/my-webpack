@@ -1,1 +1,1 @@
-module.exports='boy';
+module.exports='Boy';
