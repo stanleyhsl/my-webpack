@@ -1,2 +1,5 @@
 const b = require("./b.js");
-module.exports = b + " isa";
+
+// 张爱玲组合数
+const out = " a cool " + b;
+module.exports = out;

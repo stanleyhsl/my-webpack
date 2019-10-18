@@ -6,7 +6,10 @@ class DeployPlugin {
     this.option = option; // 上传业务需要的关键参数 
   }
   upload(filename) {
-    const localFile = path.resolve(__dirname, "../dist", filename);
+
+    const localFile = path.resolve(__dirname, "../../dist", filename);
+    console.log("localFile>>>", localFile);
+    // console.log("dstFile>>>", dstFile);
     return new Promise((resolve, reject) => {
       deploySDK(localFile, this.option, err => {
         err ? reject(err) : resolve();
@@ -17,6 +20,8 @@ class DeployPlugin {
     // 核心功能，异步的方式把业务挂在webpack的钩子afterEmit上，
     // 当webpack完成打包时，会在这个钩子上调用异步函数
     compiler.hooks.afterEmit.tapPromise("DeployPlugin", compliation => {
+      console.log('DeployPlugin')
+
       //取出所有文件
       const { assets } = compliation;
       const promises = [];

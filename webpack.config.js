@@ -1,5 +1,6 @@
 const path = require("path");
 const DeployPlugin = require("./plugins/deployPlugin");
+const CommentRemover = require("./plugins/CommentRemover");
 
 module.exports = {
   mode: "development",
@@ -44,6 +45,7 @@ module.exports = {
     new DeployPlugin({
       host: "172.16.2.35/test",
       secretKey: "esdfsd"
-    })
+    }),
+    new CommentRemover()
   ]
 };

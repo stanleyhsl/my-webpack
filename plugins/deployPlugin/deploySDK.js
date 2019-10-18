@@ -58,9 +58,7 @@ var exists = function(src, dst, callback) {
 function DeploySDK(localFile, option, callback) {
   const hostPath = "/Library/WebServer/Documents/test";
   const dstFile = path.resolve(hostPath, path.basename(localFile));
-
   if (fs.lstatSync(localFile).isFile()) {
-    console.log(">>>", dstFile);
 
     copyFile(localFile, dstFile); // 异步
     callback();
